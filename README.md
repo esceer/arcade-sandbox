@@ -9,3 +9,4 @@ How to run:
     b) venv/bin/pip install -r requirements.txt<br/>
 3. run the shell script inside src/coin_collect folder
 
+<img src="https://raw.githubusercontent.com/esceer/arcade-sandbox/master/coin_collect_gameplay_footage.png" width="500px"/>
