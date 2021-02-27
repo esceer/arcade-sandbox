@@ -13,7 +13,7 @@ MAX_BOX_SCALING = 0.35
 TILE_SCALING = 0.5
 
 # Map properties
-COIN_COUNT = 20
+COIN_COUNT = 15
 BOX_COUNT = 5
 GROUND_CENTER_Y = 32
 TILE_SIZE = 64
@@ -31,6 +31,8 @@ WATER_TEXTURE = ":resources:images/tiles/water.png"
 COAST_TEXTURE = ":resources:images/tiles/grassHill_left.png"
 BOX_TEXTURE = ":resources:images/tiles/boxCrate_double.png"
 COMPLETED_TEXT = "Nyert\u00e9l!!"
+
+GRAVITY = 0.02
 
 
 class Game(arcade.Window):
@@ -70,7 +72,9 @@ class Game(arcade.Window):
         self._setup_coins()
         self._setup_walls()
 
-        self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
+        # self.physics_engine = arcade.PhysicsEngineSimple(self.player, self.wall_list)
+        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player, self.wall_list, GRAVITY)
+
 
     def _setup_players(self):
         self.player = arcade.Sprite(PLAYER_TEXTURE, CHARACTER_SCALING)
@@ -146,7 +150,7 @@ class Game(arcade.Window):
         if self.level_completed:
             arcade.draw_rectangle_filled(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, SCREEN_WIDTH / 3, SCREEN_HEIGHT / 3,
                                          arcade.csscolor.MIDNIGHT_BLUE)
-            arcade.draw_text(COMPLETED_TEXT, SCREEN_WIDTH / 2 - 125, SCREEN_HEIGHT / 2 - 20,
+            arcade.draw_text(COMPLETED_TEXT, SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 20,
                              arcade.csscolor.WHITE, 40)
 
     def on_key_press(self, symbol: int, modifiers: int):
